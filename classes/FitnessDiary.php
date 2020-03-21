@@ -8,9 +8,11 @@
 
 namespace Classes;
 
-require_once('./vendor/autoload.php');
-require_once('User.php');
-require_once('Logger.php');
+require_once ('./vendor/autoload.php');
+require_once ('User.php');
+require_once ('Logger.php');
+require_once ('ChatStatuses.php');
+require_once ('ChatKeyboard.php');
 
 use Krugozor\Database\Mysql\Mysql as Mysql;
 
@@ -32,18 +34,7 @@ class FitnessDiary
     public function __construct($_updateData = null)
     {
         $this->initProperties($_updateData);
-
-        switch ($this->userMsg) {
-            case '/start':
-                $this->saveFirstUserData();
-                $this->sendWelcomeMsg();
-                break;
-            case 'Создать дневник тренировок':
-                $this->createDiary();
-                break;
-            default:
-                $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null, $this->keyboard);
-        }
+        $this->requestHandler();
     }
 
     protected function initProperties($_updateData = null)
@@ -60,49 +51,52 @@ class FitnessDiary
         $this->userMsg = $this->updateData['message']['text'];
     }
 
+    protected function requestHandler()
+    {
+        switch ($this->userMsg) {
+            case '/start':
+                $this->saveFirstUserData();
+                $this->sendWelcomeMsg();
+                break;
+            case 'Создать дневник тренировок':
+                $this->createDiary();
+                break;
+            default:
+                $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null, $this->keyboard);
+        }
+    }
+
     protected function sendWelcomeMsg()
     {
         $this->welcomeMsg = "Алейкум асалам, $this->userFirstName, я бот из Люберец :)";
         $this->bot->sendMessage($this->chatId, $this->welcomeMsg, null, false, null, $this->keyboard); // отправляем приветственное сообщение
-        $this->keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("Создать дневник тренировок", "Мой дневник тренировок")), true, true);
-        $this->bot->sendMessage($this->chatId, 'Выбери подходящий вариант', null, false, null, $this->keyboard);
-        //$this->sendAuthMsg();
+
+        ChatKeyboard::sendCreateOrChooseDiaryKeyboard($this->chatId, $this->bot);
     }
+
+
 
     protected function saveFirstUserData()
     {
-        $firstDataArr = array('db' => $this->db, 'userId' => $this->userId, 'chatId' => $this->chatId);
+        $firstDataArr = [
+            'db' => $this->db,
+            'userId' => $this->userId,
+            'chatId' => $this->chatId
+        ];
+
         $this->user = new User($firstDataArr);
     }
 
     protected function createDiary()
     {
-        
+//        $firstDataArr = [
+//            'db' => $this->db,
+//            'userId' => $this->userId,
+//            'chatId' => $this->chatId
+//        ];
+//
+//        $this->user = new User($firstDataArr);
+//
+//        $this->user->updateChatStatus(ChatStatuses::ENTERING_DIARY_NAME);
     }
-
-//    protected function sendAuthMsg()
-//    {
-//        $this->authMsg = "Перед тем как ебашить пройди аутентификацию :)";
-//        $this->keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("Войти", "Зарегистрироваться")), true, true);
-//        $this->bot->sendMessage($this->chatId, $this->authMsg, null, false, null, $this->keyboard);
-//    }
-//
-//
-//    protected function sendRegistrationMsg()
-//    {
-//        $registrationMsg = "Напишите ваш email и пароль в формате 'Регистрация:email||пароль'";
-//        $this->bot->sendMessage($this->chatId, $registrationMsg, null, false, null, $this->keyboard);
-//        $this->userRegistration();
-//
-//    }
-//
-//    protected function userRegistration($matches)
-//    {
-//        Logger::makeInfoLog($matches);
-//    }
-//
-//    protected function makeAuth()
-//    {
-//        //
-//    }
 }

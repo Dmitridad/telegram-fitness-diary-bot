@@ -12,6 +12,7 @@ ini_set('log_errors', 'On');
 ini_set('error_log', './logs/php_errors.log');
 
 require_once('Logger.php');
+require_once('ChatStatuses.php');
 
 class User
 {
@@ -34,24 +35,26 @@ class User
 
     protected function saveFirstUserData()
     {
+        $result = $this->checkUserForExistence();
+
+        if (empty($result)) {
+            $user = array('tg_user_id' => $this->userId, 'tg_chat_id' => $this->chatId, 'current_chat_status' => ChatStatuses::WELCOME);
+            $this->db->query('INSERT INTO `users` SET ?As', $user);
+        } else {
+            Logger::makeInfoLog('Пользователь с такими начальными данными уже существует.');
+        }
+    }
+
+    protected function checkUserForExistence()
+    {
         $result = $this->db->query("SELECT * FROM `users` WHERE `tg_user_id` = ?i AND `tg_chat_id` = ?i", $this->userId, $this->chatId);
         $resultArr = $result->fetch_assoc();
 
-        if (empty($resultArr)){
-            $user = array('tg_user_id' => $this->userId, 'tg_chat_id' => $this->chatId);
-            $this->db->query('INSERT INTO `users` SET ?As', $user);
-        } else Logger::makeInfoLog('Пользователь с такими начальными данными уже существует.');
-
-
+        return $resultArr;
     }
 
-    protected function checkForNewUser()
+    public function updateChatStatus($status)
     {
-        //
-    }
-
-    public function makeRegistration()
-    {
-
+        $this->db->query('UPDATE `users` SET `current_chat_status` = ?i WHERE `tg_chat_id` = ?i', $status, $this->chatId);
     }
 }
