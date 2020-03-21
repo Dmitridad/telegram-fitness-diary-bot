@@ -1,0 +1,6 @@
+{
+    "require": {
+        "krugozor/database": "^1.0",
+        "telegram-bot/api": "^2.3"
+    }
+}

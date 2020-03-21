@@ -1,0 +1,546 @@
+1Array
+(
+    [update_id] => 163403163
+    [message] => Array
+        (
+            [message_id] => 75
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584017166
+            [text] => Прив
+        )
+
+)
+2020-03-12 12:47:04<br>Array
+(
+    [update_id] => 163403164
+    [message] => Array
+        (
+            [message_id] => 77
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584017224
+            [text] => Приветики
+        )
+
+)
+2020-03-12 12:49:191Array
+(
+    [update_id] => 163403166
+    [message] => Array
+        (
+            [message_id] => 80
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584017358
+            [text] => Ntcn
+        )
+
+)
+2020-03-12 12:50:261Array
+(
+    [update_id] => 163403167
+    [message] => Array
+        (
+            [message_id] => 82
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584017425
+            [text] => 221
+        )
+
+)
+2020-03-12 12:51:20Array
+(
+    [update_id] => 163403168
+    [message] => Array
+        (
+            [message_id] => 84
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584017479
+            [text] => 123
+        )
+
+)
+2020-03-12 12:52:38\nArray
+(
+    [update_id] => 163403169
+    [message] => Array
+        (
+            [message_id] => 86
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584017558
+            [text] => ntcn
+        )
+
+)
+2020-03-12 14:22:49\nArray
+(
+    [update_id] => 163403170
+    [message] => Array
+        (
+            [message_id] => 88
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584022969
+            [text] => 9-
+        )
+
+)
+2020-03-12 14:27:25\nArray
+(
+    [update_id] => 163403171
+    [message] => Array
+        (
+            [message_id] => 90
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584023245
+            [text] => /command1
+            [entities] => Array
+                (
+                    [0] => Array
+                        (
+                            [offset] => 0
+                            [length] => 9
+                            [type] => bot_command
+                        )
+
+                )
+
+        )
+
+)
+2020-03-12 14:28:11\nArray
+(
+    [update_id] => 163403172
+    [message] => Array
+        (
+            [message_id] => 92
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584023290
+            [text] => /start
+            [entities] => Array
+                (
+                    [0] => Array
+                        (
+                            [offset] => 0
+                            [length] => 6
+                            [type] => bot_command
+                        )
+
+                )
+
+        )
+
+)
+2020-03-12 14:28:14\nArray
+(
+    [update_id] => 163403173
+    [message] => Array
+        (
+            [message_id] => 94
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584023294
+            [text] => /start
+            [entities] => Array
+                (
+                    [0] => Array
+                        (
+                            [offset] => 0
+                            [length] => 6
+                            [type] => bot_command
+                        )
+
+                )
+
+        )
+
+)
+2020-03-12 15:21:48\nArray
+(
+    [update_id] => 163403174
+    [message] => Array
+        (
+            [message_id] => 96
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584026507
+            [text] => Тест
+        )
+
+)
+2020-03-13 10:14:20\n2020-03-13 10:14:29\n2020-03-13 10:15:46\nArray
+(
+    [update_id] => 163403175
+    [message] => Array
+        (
+            [message_id] => 98
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584094546
+            [text] => тест
+        )
+
+)
+2020-03-13 10:26:02\n2020-03-13 10:46:51\nArray
+(
+    [update_id] => 163403176
+    [message] => Array
+        (
+            [message_id] => 101
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584096410
+            [text] => /start
+            [entities] => Array
+                (
+                    [0] => Array
+                        (
+                            [offset] => 0
+                            [length] => 6
+                            [type] => bot_command
+                        )
+
+                )
+
+        )
+
+)
+2020-03-13 10:58:522020-03-13 10:59:362020-03-13 11:02:462020-03-13 11:03:092020-03-13 11:49:132020-03-13 11:49:232020-03-13 11:49:55Array
+(
+    [update_id] => 268040928
+    [message] => Array
+        (
+            [message_id] => 4
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584100195
+            [text] => тест
+        )
+
+)
+2020-03-13 11:50:472020-03-13 12:56:49Array
+(
+    [update_id] => 268040929
+    [message] => Array
+        (
+            [message_id] => 6
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584104209
+            [text] => /start
+            [entities] => Array
+                (
+                    [0] => Array
+                        (
+                            [offset] => 0
+                            [length] => 6
+                            [type] => bot_command
+                        )
+
+                )
+
+        )
+
+)
+2020-03-13 13:23:07Array
+(
+    [update_id] => 268040930
+    [message] => Array
+        (
+            [message_id] => 8
+            [from] => Array
+                (
+                    [id] => 291404329
+                    [is_bot] => 
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [language_code] => ru
+                )
+
+            [chat] => Array
+                (
+                    [id] => 291404329
+                    [first_name] => Дмитрий
+                    [last_name] => Любецкий
+                    [username] => dmitridad_msk
+                    [type] => private
+                )
+
+            [date] => 1584105787
+            [text] => /help
+            [entities] => Array
+                (
+                    [0] => Array
+                        (
+                            [offset] => 0
+                            [length] => 5
+                            [type] => bot_command
+                        )
+
+                )
+
+        )
+
+)

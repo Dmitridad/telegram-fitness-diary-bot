@@ -1,5 +1,1 @@
-<?php
-
-return array(
-    'token' => '824976833:AAEyEnTNafq86nX2jk0xGJyTEhwqHueBWpw'
-);
+<?phpreturn array(    'token' => '1108314590:AAFH6Mv9UsuCCK_6tesW_nZTYzWNJ29PCvQ',    'proxy' => '34.84.57.254:22080',    'url' => 'https://api.telegram.org/bot');
