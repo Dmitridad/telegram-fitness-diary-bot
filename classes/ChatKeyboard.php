@@ -12,8 +12,6 @@ require_once ('./vendor/autoload.php');
 
 class ChatKeyboard
 {
-
-
     public static function sendCreateOrChooseDiaryKeyboard($chatId, $bot)
     {
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("Создать дневник тренировок", "Мой дневник тренировок")), true, true);

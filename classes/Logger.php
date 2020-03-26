@@ -19,12 +19,18 @@ class Logger
 
     public static function makeInfoLog($data)
     {
-        self::getDate('./logs/updateLog.log');
+        self::getDate('./logs/infoLog.log');
         file_put_contents('./logs/infoLog.log', print_r($data, 1), FILE_APPEND);
+    }
+
+    public static function makeErrorLog($data)
+    {
+        self::getDate('./logs/errorLog.log');
+        file_put_contents('./logs/errorLog.log', print_r($data, 1), FILE_APPEND);
     }
 
     protected function getDate($filePath)
     {
-        file_put_contents($filePath, '[' . date("Y-m-d H:i:s") . '] ', FILE_APPEND);
+        file_put_contents($filePath,'[' . date("Y-m-d H:i:s") . '] ', FILE_APPEND);
     }
 }

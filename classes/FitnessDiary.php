@@ -8,11 +8,12 @@
 
 namespace Classes;
 
-require_once ('./vendor/autoload.php');
-require_once ('User.php');
-require_once ('Logger.php');
-require_once ('ChatStatuses.php');
-require_once ('ChatKeyboard.php');
+require_once('./vendor/autoload.php');
+require_once('User.php');
+require_once('Logger.php');
+require_once('ChatStatuses.php');
+require_once('ChatKeyboard.php');
+require_once('Diary.php');
 
 use Krugozor\Database\Mysql\Mysql as Mysql;
 
@@ -62,19 +63,18 @@ class FitnessDiary
                 $this->createDiary();
                 break;
             default:
-                $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null, $this->keyboard);
+                $this->handleUserInput();
+                $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null);
         }
     }
 
     protected function sendWelcomeMsg()
     {
         $this->welcomeMsg = "Алейкум асалам, $this->userFirstName, я бот из Люберец :)";
-        $this->bot->sendMessage($this->chatId, $this->welcomeMsg, null, false, null, $this->keyboard); // отправляем приветственное сообщение
+        $this->bot->sendMessage($this->chatId, $this->welcomeMsg, null, false, null); // отправляем приветственное сообщение
 
         ChatKeyboard::sendCreateOrChooseDiaryKeyboard($this->chatId, $this->bot);
     }
-
-
 
     protected function saveFirstUserData()
     {
@@ -89,14 +89,21 @@ class FitnessDiary
 
     protected function createDiary()
     {
-//        $firstDataArr = [
-//            'db' => $this->db,
-//            'userId' => $this->userId,
-//            'chatId' => $this->chatId
-//        ];
-//
-//        $this->user = new User($firstDataArr);
-//
-//        $this->user->updateChatStatus(ChatStatuses::ENTERING_DIARY_NAME);
+        ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::CREATE_OR_SELECT_DIARY);
+        $this->bot->sendMessage($this->chatId, 'Введите название дневника', null, false, null);
+    }
+
+    protected function handleUserInput()
+    {
+        $currChatStatus = ChatStatuses::selectCurrChatStatus($this->db, $this->chatId);
+        $prevChatStatus = ChatStatuses::selectPrevChatStatus($this->db, $this->chatId);
+
+        if ($currChatStatus == ChatStatuses::CREATE_OR_SELECT_DIARY && $prevChatStatus == ChatStatuses::WELCOME) {
+            $response = Diary::createNewDiary($this->db, $this->userId, $this->userMsg);
+
+            if ($response == true) {
+                $this->bot->sendMessage($this->chatId, 'Поздравляю, твой новый дневник создан!', null, false, null);
+            }
+        }
     }
 }

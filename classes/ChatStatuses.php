@@ -8,6 +8,8 @@
 
 namespace Classes;
 
+require_once('Logger.php');
+
 
 class ChatStatuses
 {
@@ -26,4 +28,34 @@ class ChatStatuses
     const DELETING_AN_EXERCISE = 13;
     const SHOW_THIS_DAY_EXERCISES = 14;
     const SHOW_USER_TRAINING_DIARIES = 15;
+
+
+    public static function updateChatStatus($db, $chatId, $status)
+    {
+        $currChatStatus = self::selectCurrChatStatus($db, $chatId);
+
+        try {
+            $db->query('UPDATE `users` SET `current_chat_status` = ?i, `previous_chat_status` = ?i WHERE `tg_chat_id` = ?i', $status, $currChatStatus, $chatId);
+        } catch (\Exception $e) {
+            Logger::makeErrorLog($e->getMessage());
+        }
+    }
+
+    public static function selectCurrChatStatus($db, $chatId)
+    {
+        $result = $db->query("SELECT * FROM `users` WHERE `tg_chat_id` = ?i", $chatId);
+        $resultArr = $result->fetch_assoc();
+        $currChatStatus = $resultArr['current_chat_status'];
+
+        return $currChatStatus;
+    }
+
+    public static function selectPrevChatStatus($db, $chatId)
+    {
+        $result = $db->query("SELECT * FROM `users` WHERE `tg_chat_id` = ?i", $chatId);
+        $resultArr = $result->fetch_assoc();
+        $prevChatStatus = $resultArr['previous_chat_status'];
+
+        return $prevChatStatus;
+    }
 }

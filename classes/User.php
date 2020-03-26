@@ -52,9 +52,4 @@ class User
 
         return $resultArr;
     }
-
-    public function updateChatStatus($status)
-    {
-        $this->db->query('UPDATE `users` SET `current_chat_status` = ?i WHERE `tg_chat_id` = ?i', $status, $this->chatId);
-    }
 }
