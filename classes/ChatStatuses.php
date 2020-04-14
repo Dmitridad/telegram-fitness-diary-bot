@@ -16,7 +16,7 @@ class ChatStatuses
     const WELCOME = 1;
     const CREATE_OR_SELECT_DIARY = 2;
     const ENTERING_DIARY_NAME = 3;
-    const SELECTION_OF_TRAINING_DAYS = 4;
+    const ENTERING_TRAINING_DAYS = 4;
     const SHOW_USER_TRAINING_DAYS = 5;
     const FILLING_OUT_TRAINING_DAYS = 6;
     const VIEWING_TRAINING_DAY = 7;

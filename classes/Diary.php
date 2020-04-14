@@ -21,6 +21,15 @@ class Diary
 
         try {
             $db->query('INSERT INTO `user_diaries` SET ?As', $diary);
+
+            //получаем id только что созданного дневника
+            $selectResponse = $db->query("SELECT * FROM `user_diaries` WHERE `user_id` = ?i ORDER BY `id` DESC LIMIT 1", $userId);
+            $selectArr = $selectResponse->fetch_assoc();
+
+            $newDiaryId = $selectArr['id'];
+
+            //вставляем id только что созданного дневника в current_id
+            $db->query('UPDATE `users` SET `current_diary` = ?i WHERE `tg_user_id` = ?i', $newDiaryId, $userId);
         } catch (\Exception $e) {
             Logger::makeErrorLog($e->getMessage());
             return false;

@@ -8,12 +8,7 @@
 
 namespace Classes;
 
-require_once('./vendor/autoload.php');
-require_once('User.php');
-require_once('Logger.php');
-require_once('ChatStatuses.php');
-require_once('ChatKeyboard.php');
-require_once('Diary.php');
+require_once('./include/required_classes.php');
 
 use Krugozor\Database\Mysql\Mysql as Mysql;
 
@@ -41,9 +36,11 @@ class FitnessDiary
     protected function initProperties($_updateData = null)
     {
         $this->updateData = $_updateData;
+
         $this->db = Mysql::create('localhost', 'id12898702_dmitridad', 'dmitridad123456')
             ->setCharset('utf8')
             ->setDatabaseName('id12898702_fitness_diary_bot');
+
         $this->apiConfig = include_once('./config/config.php');
         $this->bot = new \TelegramBot\Api\BotApi($this->apiConfig['token']);
         $this->userId = $this->updateData['message']['from']['id'];
@@ -64,7 +61,7 @@ class FitnessDiary
                 break;
             default:
                 $this->handleUserInput();
-                $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null);
+                break;
         }
     }
 
@@ -91,6 +88,7 @@ class FitnessDiary
     {
         ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::CREATE_OR_SELECT_DIARY);
         $this->bot->sendMessage($this->chatId, 'Введите название дневника', null, false, null);
+        ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::ENTERING_DIARY_NAME);
     }
 
     protected function handleUserInput()
@@ -98,12 +96,19 @@ class FitnessDiary
         $currChatStatus = ChatStatuses::selectCurrChatStatus($this->db, $this->chatId);
         $prevChatStatus = ChatStatuses::selectPrevChatStatus($this->db, $this->chatId);
 
-        if ($currChatStatus == ChatStatuses::CREATE_OR_SELECT_DIARY && $prevChatStatus == ChatStatuses::WELCOME) {
+        if ($currChatStatus == ChatStatuses::ENTERING_DIARY_NAME && $prevChatStatus == ChatStatuses::CREATE_OR_SELECT_DIARY) {
             $response = Diary::createNewDiary($this->db, $this->userId, $this->userMsg);
 
             if ($response == true) {
-                $this->bot->sendMessage($this->chatId, 'Поздравляю, твой новый дневник создан!', null, false, null);
+                $this->bot->sendMessage($this->chatId,
+                    'Поздравляю, твой новый дневник создан! Теперь введите дни по которым будете тренироваться и запишите их через запятую. Названия дней - пн, вт, ср, чт, пт, сб, вс.',
+                    null, false, null);
+                ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::ENTERING_TRAINING_DAYS);
             }
+        } else if ($currChatStatus == ChatStatuses::ENTERING_TRAINING_DAYS && $prevChatStatus == ChatStatuses::ENTERING_DIARY_NAME) {
+            $trainingDays = new TrainingDays($this->db, $this->userId, $this->userMsg);
+        } else {
+            $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null);
         }
     }
 }
