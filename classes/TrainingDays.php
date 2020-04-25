@@ -13,9 +13,10 @@ require_once('ChatStatuses.php');
 class TrainingDays
 {
     protected $db;
+    protected $userId;
     protected $userMsg;
     protected $chatId;
-    protected $userId;
+    protected $bot;
 
     protected $days = [
         1 => 'пн',
@@ -27,9 +28,9 @@ class TrainingDays
         7 => 'вс',
     ];
 
-    public function __construct($db, $userId, $userMsg)
+    public function __construct($db, $userId, $userMsg, $chatId, $bot)
     {
-        $this->init($db, $userId, $userMsg);
+        $this->init($db, $userId, $userMsg, $chatId, $bot);
 
         $result = $this->handleUserMsg($this->userMsg);
         if ($result == false) {
@@ -43,15 +44,18 @@ class TrainingDays
         }
     }
 
-    protected function init($_db, $_userId, $_userMsg)
+    protected function init($_db, $_userId, $_userMsg, $_chatId, $_bot)
     {
         $this->db = $_db;
         $this->userId = $_userId;
         $this->userMsg = $_userMsg;
+        $this->chatId = $_chatId;
+        $this->bot = $_bot;
     }
 
     protected function handleUserMsg($userMsg)
     {
+        $userMsg = str_replace(' ', '', $userMsg);
         $trainingDays = explode(',', $userMsg);
         $trainingDaysId = null;
 
@@ -83,7 +87,10 @@ class TrainingDays
             foreach ($trainingDays as $trainingDay) {
                 $record = ['user_id' => $this->userId, 'day_of_the_week' => $trainingDay, 'diary_id' => $currentDiaryId];
                 $this->db->query('INSERT INTO `user_training_days` SET ?As', $record);
+
             }
+
+            return true;
         } catch (\Exception $e) {
             Logger::makeErrorLog($e->getMessage());
 
@@ -93,14 +100,30 @@ class TrainingDays
 
     protected function sendSuccessMsg()
     {
-        $this->bot->sendMessage($this->chatId, 'Тренировочные дни успешно сохранены! Теперь ваш дневник готов! Можете перейти к его заполнению.', null, false, null);
-        ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::SHOW_USER_TRAINING_DAYS);
-        $this->showUserTrainingDays();
+        try {
+            $this->bot->sendMessage($this->chatId, 'Тренировочные дни успешно сохранены! Теперь ваш дневник готов! Можете перейти к его заполнению.', null, false, null);
+            ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::SHOW_USER_TRAINING_DAYS);
+            $this->showUserTrainingDays();
+        } catch (\Exception $e) {
+            Logger::makeErrorLog($e->getMessage());
+        }
     }
 
     protected function showUserTrainingDays()
     {
-        $result = $this->db->query("SELECT * FROM `user_training_days` WHERE `user_id` = ?i", $this->userId);
-        $resultArr = $result->fetch_assoc();
+        $result = $this->db->query("SELECT `name` 
+                                    FROM `days_of_the_week`  
+                                    INNER JOIN `user_training_days` ON `user_training_days`.`day_of_the_week` = `days_of_the_week`.`id`
+                                    WHERE `user_training_days`.`user_id` = ?i and `user_training_days`.`diary_id` = (SELECT `current_diary` FROM `users` WHERE `tg_user_id` = ?i)", $this->userId, $this->userId);
+
+        $daysArr = [];
+        while (($data = $result->fetch_assoc()) !== null) {
+            $daysArr[] .= $data['name'];
+        }
+
+        $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array($daysArr), true, true); //создать класс или метод для создания клавиатуры, который будет возвращать уже готовую клаву
+        $this->bot->sendMessage($this->chatId, 'Выберите тренировочный день для его заполнения', null, false, null, $keyboard);
+
+
     }
 }

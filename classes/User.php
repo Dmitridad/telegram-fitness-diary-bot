@@ -8,9 +8,6 @@
 
 namespace Classes;
 
-ini_set('log_errors', 'On');
-ini_set('error_log', './logs/php_errors.log');
-
 require_once('Logger.php');
 require_once('ChatStatuses.php');
 

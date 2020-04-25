@@ -1,12 +1,27 @@
-<script type="text/javascript">
-    $(function () {
-        $('#header-carousel').owlCarousel({
-            items: 1,
-            loop: true,
-            autoplay: false,
-            autoplayHoverPause: true,
-            smartSpeed: 1000,
-            center: false,
-            nav: true,
-            rewind: true, // stagePadding: 10, // navContainer: '.slide-produkt.arrow', }) });
-</script>
+<?php
+
+namespace Classes;
+
+require_once ('classes/ChatStatuses.php');
+
+return $transitions = [
+   ChatStatuses::WELCOME  => [
+        'from' => [
+
+        ],
+        'to' => [
+
+        ]
+    ]
+];
+
+function compareStatuses($_currChatStatus, $_prevChatStatus)
+{
+    $currChatStatus = ChatStatuses::selectCurrChatStatus($this->db, $this->chatId);
+    $prevChatStatus = ChatStatuses::selectPrevChatStatus($this->db, $this->chatId);
+
+    if ($currChatStatus == $_currChatStatus && $prevChatStatus == $_prevChatStatus) {
+
+        return 1;
+    }
+}

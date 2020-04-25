@@ -65,14 +65,6 @@ class FitnessDiary
         }
     }
 
-    protected function sendWelcomeMsg()
-    {
-        $this->welcomeMsg = "Алейкум асалам, $this->userFirstName, я бот из Люберец :)";
-        $this->bot->sendMessage($this->chatId, $this->welcomeMsg, null, false, null); // отправляем приветственное сообщение
-
-        ChatKeyboard::sendCreateOrChooseDiaryKeyboard($this->chatId, $this->bot);
-    }
-
     protected function saveFirstUserData()
     {
         $firstDataArr = [
@@ -84,6 +76,14 @@ class FitnessDiary
         $this->user = new User($firstDataArr);
     }
 
+    protected function sendWelcomeMsg()
+    {
+        $this->welcomeMsg = "Алейкум асалам, $this->userFirstName, я бот из Люберец :)";
+        $this->bot->sendMessage($this->chatId, $this->welcomeMsg, null, false, null); // отправляем приветственное сообщение
+
+        ChatKeyboard::sendCreateOrChooseDiaryKeyboard($this->chatId, $this->bot);
+    }
+
     protected function createDiary()
     {
         ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::CREATE_OR_SELECT_DIARY);
@@ -93,10 +93,7 @@ class FitnessDiary
 
     protected function handleUserInput()
     {
-        $currChatStatus = ChatStatuses::selectCurrChatStatus($this->db, $this->chatId);
-        $prevChatStatus = ChatStatuses::selectPrevChatStatus($this->db, $this->chatId);
-
-        if ($currChatStatus == ChatStatuses::ENTERING_DIARY_NAME && $prevChatStatus == ChatStatuses::CREATE_OR_SELECT_DIARY) {
+        if ($this->compareStatuses(ChatStatuses::ENTERING_DIARY_NAME, ChatStatuses::CREATE_OR_SELECT_DIARY)) {
             $response = Diary::createNewDiary($this->db, $this->userId, $this->userMsg);
 
             if ($response == true) {
@@ -105,10 +102,21 @@ class FitnessDiary
                     null, false, null);
                 ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::ENTERING_TRAINING_DAYS);
             }
-        } else if ($currChatStatus == ChatStatuses::ENTERING_TRAINING_DAYS && $prevChatStatus == ChatStatuses::ENTERING_DIARY_NAME) {
-            $trainingDays = new TrainingDays($this->db, $this->userId, $this->userMsg);
+        } else if ($this->compareStatuses(ChatStatuses::ENTERING_TRAINING_DAYS, ChatStatuses::ENTERING_DIARY_NAME)) {
+            $trainingDays = new TrainingDays($this->db, $this->userId, $this->userMsg, $this->chatId, $this->bot);
         } else {
             $this->bot->sendMessage($this->chatId, 'Дефаулт', null, false, null);
+        }
+    }
+
+    protected function compareStatuses($_currChatStatus, $_prevChatStatus)
+    {
+        $currChatStatus = ChatStatuses::selectCurrChatStatus($this->db, $this->chatId);
+        $prevChatStatus = ChatStatuses::selectPrevChatStatus($this->db, $this->chatId);
+
+        if ($currChatStatus == $_currChatStatus && $prevChatStatus == $_prevChatStatus) {
+
+            return 1;
         }
     }
 }
