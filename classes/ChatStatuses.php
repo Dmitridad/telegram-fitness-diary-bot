@@ -66,8 +66,8 @@ class ChatStatuses
         const EXERCISE_DELETED = 13.1; // упражнение удалено
     const TRAINING_DAY_NAME_CHANGING = 14; // изменение названия тренировочного дня
         const NEW_TRAINING_DAY_NAME_SAVED = 14.1; // новое название тренировочного дня сохранено
-    const TRAINING_DAY_DELETING = 15; // приветствие
-        const TRAINING_DAY_DELETED = 15.1; // приветствие
+    const TRAINING_DAY_DELETING = 15; // удаление тренировочного дня
+        const TRAINING_DAY_DELETED = 15.1; // тренировочный день удален
 
 
     public static function updateChatStatus($db, $chatId, $status)
