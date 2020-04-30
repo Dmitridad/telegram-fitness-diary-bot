@@ -29,7 +29,7 @@ class Diary
             $newDiaryId = $selectArr['id'];
 
             //вставляем id только что созданного дневника в current_id
-            $db->query('UPDATE `users` SET `current_diary` = ?i WHERE `tg_user_id` = ?i', $newDiaryId, $userId);
+            $db->query('UPDATE `users` SET `current_diary` = ?d WHERE `tg_user_id` = ?i', $newDiaryId, $userId);
         } catch (\Exception $e) {
             Logger::makeErrorLog($e->getMessage());
             return false;

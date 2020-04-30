@@ -35,7 +35,7 @@ class User
         $result = $this->checkUserForExistence();
 
         if (empty($result)) {
-            $user = array('tg_user_id' => $this->userId, 'tg_chat_id' => $this->chatId, 'current_chat_status' => ChatStatuses::WELCOME);
+            $user = array('tg_user_id' => $this->userId, 'tg_chat_id' => $this->chatId, 'current_chat_status' => ChatStatuses::USER_CREATED);
             $this->db->query('INSERT INTO `users` SET ?As', $user);
         } else {
             Logger::makeInfoLog('Пользователь с такими начальными данными уже существует.');

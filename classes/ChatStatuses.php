@@ -29,7 +29,8 @@ class ChatStatuses
     const SHOW_THIS_DAY_EXERCISES = 14;
     const SHOW_USER_TRAINING_DIARIES = 15;*/
 
-    const WELCOME = 1; // приветствие
+    const USER_CREATED = 1; // пользователь создан
+        const WELCOME = 1.1; // приветствие
     const SHOW_START_MENU = 2; // вывод начального меню
     const DIARY_CREATION = 3; // создание дневника
         const ENTERING_DIARY_NAME = 3.1; // ввод названия дневника
@@ -75,7 +76,7 @@ class ChatStatuses
         $currChatStatus = self::selectCurrChatStatus($db, $chatId);
 
         try {
-            $db->query('UPDATE `users` SET `current_chat_status` = ?i, `previous_chat_status` = ?i WHERE `tg_chat_id` = ?i', $status, $currChatStatus, $chatId);
+            $db->query('UPDATE `users` SET `current_chat_status` = ?d, `previous_chat_status` = ?d WHERE `tg_chat_id` = ?i', $status, $currChatStatus, $chatId);
         } catch (\Exception $e) {
             Logger::makeErrorLog($e->getMessage());
         }

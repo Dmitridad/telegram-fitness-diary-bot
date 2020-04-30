@@ -39,6 +39,7 @@ class TrainingDays
         } else {
             $result = $this->createTrainingDays($result);
             if ($result != false) {
+                ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::TRAINING_DAYS_CREATED);
                 $this->sendSuccessMsg();
             }
         }
@@ -102,7 +103,7 @@ class TrainingDays
     {
         try {
             $this->bot->sendMessage($this->chatId, 'Тренировочные дни успешно сохранены! Теперь ваш дневник готов! Можете перейти к его заполнению.', null, false, null);
-            ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::SHOW_USER_TRAINING_DAYS);
+            ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::SHOW_DIARY_MENU);
             $this->showUserTrainingDays();
         } catch (\Exception $e) {
             Logger::makeErrorLog($e->getMessage());
@@ -123,7 +124,5 @@ class TrainingDays
 
         $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array($daysArr), true, true); //создать класс или метод для создания клавиатуры, который будет возвращать уже готовую клаву
         $this->bot->sendMessage($this->chatId, 'Выберите тренировочный день для его заполнения', null, false, null, $keyboard);
-
-
     }
 }
