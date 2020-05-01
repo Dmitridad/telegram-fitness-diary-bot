@@ -8,10 +8,6 @@
 
 namespace Classes;
 
-require_once('User.php');
-require_once('ChatStatuses.php');
-require_once ('Logger.php');
-
 
 class Diary
 {

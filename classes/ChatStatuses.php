@@ -8,8 +8,6 @@
 
 namespace Classes;
 
-require_once('Logger.php');
-
 
 class ChatStatuses
 {

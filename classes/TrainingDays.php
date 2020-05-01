@@ -8,7 +8,6 @@
 
 namespace Classes;
 
-require_once('ChatStatuses.php');
 
 class TrainingDays
 {
@@ -104,7 +103,9 @@ class TrainingDays
         try {
             $this->bot->sendMessage($this->chatId, 'Тренировочные дни успешно сохранены! Теперь ваш дневник готов! Можете перейти к его заполнению.', null, false, null);
             ChatStatuses::updateChatStatus($this->db, $this->chatId, ChatStatuses::SHOW_DIARY_MENU);
-            $this->showUserTrainingDays();
+
+            new ChatMenu('diary_menu', $this->db, $this->userId, $this->userMsg, $this->chatId, $this->bot);
+            //$this->showUserTrainingDays();
         } catch (\Exception $e) {
             Logger::makeErrorLog($e->getMessage());
         }
